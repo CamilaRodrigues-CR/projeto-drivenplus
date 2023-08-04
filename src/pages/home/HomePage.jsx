@@ -3,7 +3,9 @@ export default function HomePage(){
 
     return(
         <>
-        olá Fulano
+         <div> 
+            <img src=" alt="logo/>
+         </div>
         </>
     )
 }

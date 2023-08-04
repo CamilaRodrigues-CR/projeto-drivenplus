@@ -4,14 +4,14 @@ import EscolherPlano from '../pages/subscript/EscolherPlano';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default function Modal({isOpen, setModalOpen , children, id ,nome ,numero, codigo, validade }){
+export default function Modal({isOpen, setModalOpen , children, id ,nome ,numero, codigo, validade}){
     // const [choised, setChoised] = useState(false);
     const navigate = useNavigate();
     const dadosSerializados = localStorage.getItem("dadosSalvos");
     const dadosDeserializados = JSON.parse(dadosSerializados);
 
 
-    function EscolherPlano(id ,nome ,numero, codigo, validade){
+    function EscolherPlano(){
        alert ('escolhido com sucesso')
 
             const URL = "https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions";
@@ -19,11 +19,11 @@ export default function Modal({isOpen, setModalOpen , children, id ,nome ,numero
                 headers: { Authorization: `Bearer ${dadosDeserializados.token}` }
             }
             const body = {
-                membershipId: id,
-                cardName: nome,
-                cardNumber: numero,
-                securityNumber: codigo,
-                expirationDate: validade
+                membershipId: {id},
+                cardName: {nome},
+                cardNumber: {numero},
+                securityNumber: {codigo},
+                expirationDate: {validade}
             }
 
             const promise = axios.post(URL, body, config);
