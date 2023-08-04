@@ -1,12 +1,12 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 
 export default function Subscripions(){
     const dadosSerializados = localStorage.getItem("dadosSalvos"); 
     const dadosDeserializados = JSON.parse(dadosSerializados)
     
-    // const {token} = useContext(AuthContext)
     const [planos, setPlanos] = useState([]);
 
     useEffect ( () => {
@@ -33,10 +33,10 @@ export default function Subscripions(){
             <h1>Escolha seu plano</h1>
             <ul>
                 {planos.map( plano => (
-                <li key={plano.id}> 
+               <Link key={plano.id} to={`/subscriptions/${plano.id}`}>
                     <img src={plano.image} alt="Logo D+" />
                     <p>R${plano.price}</p>
-                </li>
+                </Link>
                 )
                 )}
 
