@@ -23,7 +23,7 @@ export default function LoginPage() {
             promise.then((res) => {
                contexto.setToken(res.data.token);
                 navigate('/subscriptions')
-                console.log(config);
+                console.log(res.data);
             })
             promise.catch( (err) => {
                 alert(err.response.data.message);
