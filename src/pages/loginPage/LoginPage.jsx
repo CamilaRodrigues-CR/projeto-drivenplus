@@ -1,24 +1,29 @@
-//import SignUp from "../sign-up/SignUp";
 import { Link, useNavigate } from "react-router-dom"
-//import Entrar from "../../components/loginPage/Entrar"
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import AuthContext from "../../assets/constants/contexts/AuthContext";
 
 
 export default function LoginPage() {
     const [email, setEmail] = useState('') 
     const [senha, setSenha] = useState('')
+    const navigate = useNavigate();
+
+    const contexto = useContext(AuthContext);
 
     function fazerLogin(event){
         event.preventDefault();
 
         const URL = 'https://mock-api.driven.com.br/api/v4/driven-plus/auth/login'
         const dados ={ email: email , password: senha}
+
+        
         
         const promise = axios.post(URL , dados);
             promise.then((res) => {
-                useNavigate("/subscriptions")
-                console.log(res.data);
+               contexto.setToken(res.data.token);
+                navigate('/subscriptions')
+                console.log(config);
             })
             promise.catch( (err) => {
                 alert(err.response.data.message);
