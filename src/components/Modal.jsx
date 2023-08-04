@@ -19,11 +19,11 @@ export default function Modal({isOpen, setModalOpen , children, id ,nome ,numero
                 headers: { Authorization: `Bearer ${dadosDeserializados.token}` }
             }
             const body = {
-                membershipId: {id},
-                cardName: {nome},
-                cardNumber: {numero},
-                securityNumber: {codigo},
-                expirationDate: {validade}
+                membershipId: id,
+                cardName: nome,
+                cardNumber: numero,
+                securityNumber: codigo,
+                expirationDate: validade
             }
 
             const promise = axios.post(URL, body, config);
@@ -33,7 +33,7 @@ export default function Modal({isOpen, setModalOpen , children, id ,nome ,numero
                 
             })
             promise.catch(err => {
-                console.log(err.response)
+                console.log(err)
             })
 
         
