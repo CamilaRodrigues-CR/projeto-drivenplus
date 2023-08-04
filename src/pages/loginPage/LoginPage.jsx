@@ -9,21 +9,24 @@ export default function LoginPage() {
     const [senha, setSenha] = useState('')
     const navigate = useNavigate();
 
-    const contexto = useContext(AuthContext);
+    const {setToken} = useContext(AuthContext);
 
     function fazerLogin(event){
         event.preventDefault();
 
         const URL = 'https://mock-api.driven.com.br/api/v4/driven-plus/auth/login'
         const dados ={ email: email , password: senha}
+            
 
-        
-        
         const promise = axios.post(URL , dados);
             promise.then((res) => {
-               contexto.setToken(res.data.token);
+               setToken(res.data.token);
                 navigate('/subscriptions')
                 console.log(res.data);
+
+                const savedDados = {email: email , password: senha , token: res.data.token}
+                const savedDadosSerializados = JSON.stringify(savedDados);
+                localStorage.setItem("dadosSalvos", savedDadosSerializados);
             })
             promise.catch( (err) => {
                 alert(err.response.data.message);

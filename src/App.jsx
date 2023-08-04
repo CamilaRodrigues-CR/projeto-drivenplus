@@ -14,6 +14,9 @@ function App() {
   const [token, setToken] = useState('')
   const contexto = {token, setToken};
 
+  localStorage.setItem("savedToken", {token});
+
+
   return (
     <AuthContext.Provider value={contexto}>
       <BrowserRouter>
