@@ -7,6 +7,7 @@ import SignUp from "./pages/sign-up/SignUp";
 import Subscripions from './pages/subscript/subscriptions';
 import AuthContext from './assets/constants/contexts/AuthContext';
 import SubscriptionId from './pages/subscript/SubscriptionIdPlano';
+import HomePage from './pages/home/HomePage';
 
 
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/subscriptions" element={<Subscripions />} />
           <Route path="/subscriptions/:idPlano" element={<SubscriptionId/>} />
+          <Route path="/home" element={<HomePage/>} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>

@@ -1,43 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import EscolherPlano from '../pages/subscript/EscolherPlano';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-export default function Modal({isOpen, setModalOpen , children}){
+export default function Modal({isOpen, setModalOpen , children, id ,nome ,numero, codigo, validade }){
     // const [choised, setChoised] = useState(false);
-
-    function EscolherPlano(props){
+    const navigate = useNavigate();
     const dadosSerializados = localStorage.getItem("dadosSalvos");
     const dadosDeserializados = JSON.parse(dadosSerializados);
 
-    const [choise, setChoise] =useState([])
-    const navigate = useNavigate();
 
-    useEffect (() => {
-        const URL = "https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions";
-        const config = {
-            headers: { Authorization: `Bearer ${dadosDeserializados.token}` }
+    function EscolherPlano(id ,nome ,numero, codigo, validade){
+       alert ('escolhido com sucesso')
+
+            const URL = "https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions";
+            const config = {
+                headers: { Authorization: `Bearer ${dadosDeserializados.token}` }
+            }
+            const body = {
+                membershipId: id,
+                cardName: nome,
+                cardNumber: numero,
+                securityNumber: codigo,
+                expirationDate: validade
+            }
+
+            const promise = axios.post(URL, body, config);
+            promise.then(res => {
+                console.log(res.data)
+                navigate('/home')
+                
+            })
+            promise.catch(err => {
+                console.log(err.response)
+            })
+
+        
         }
-        const body = {
-            membershipId: (props.id),
-            cardName: (props.nome),
-            cardNumber: (props.numero),
-            securityNumber: (props.codigo),
-            expirationDate: (props.validade)
-        }
-
-        const promise = axios.post(URL, body, config);
-        promise.then(res => {
-            console.log(res.data)
-            navigate('/home')
-            
-        })
-        promise.catch(err => {
-            console.log(err.response.data.message)
-        })
-
-    }, [])
-    }
 
     if(isOpen){
     return(

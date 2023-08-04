@@ -7,6 +7,7 @@ export default function SignUp() {
     const [cpf, setCpf] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const navigate =useNavigate();
 
     function fazerCadastro(event) {
         event.preventDefault();
@@ -20,7 +21,7 @@ export default function SignUp() {
         const promise = axios.post(URL, dados);
             promise.then ( (res) => {
                 console.log(res.data)
-                useNavigate("/");
+                navigate("/");
             })
             promise.catch ( (err) => {
                 console.log(err.response.data)
